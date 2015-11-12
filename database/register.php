@@ -90,7 +90,7 @@ body {
 	background-color: white;
 	color: #435160;
 	font-family: "Open Sans", sans-serif;
-	background-image: url(../images/greyBg.jpg);
+	background-image: url(Bg.jpg);
 }
 
 h2 {
