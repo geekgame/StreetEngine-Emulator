@@ -35,6 +35,7 @@ namespace StreetEngine.EnginePacket.GlobalHandlers
     using System.IO;
     using System.Linq;
     using System.Text;
+    using System.Text.RegularExpressions;
     using System.Threading;
 
     public class ChatMessage
@@ -71,7 +72,7 @@ namespace StreetEngine.EnginePacket.GlobalHandlers
 
             string message = Encoding.ASCII.GetString(_data);
 
-            if (message.Length > 1)
+            if (message.Length > 1 && Regex.IsMatch(message, "[a-z0-9]+"))
             { // Message check 1/1
                 if (Commands.Any(x => message.Contains(x)))
                 { // Command check 1/2

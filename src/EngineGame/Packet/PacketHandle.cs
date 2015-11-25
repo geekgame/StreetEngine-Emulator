@@ -28,6 +28,12 @@
  *                                                               *
  ***************************************************************** 
 */
+
+using System.Net.Sockets;
+using System.Text.RegularExpressions;
+using StreetEngine.Engine.Network;
+using StreetEngine.EngineDatabase;
+
 namespace StreetEngine.EngineGame.Packet
 {
     using System;
@@ -118,8 +124,30 @@ namespace StreetEngine.EngineGame.Packet
                     case ((Int16)EngineEnum.HeadersEnum.Recv.BM_SC.BM_SC_MINI_GAME_END):  // End the mini game with infos (still in progress)
                     case ((Int16)EngineEnum.HeadersEnum.Recv.BM_SC.BM_SC_EXCHANGE_MONEY): // Exchange coins for ruppees (still in progress)
                     case ((Int16)EngineEnum.HeadersEnum.Recv.BM_SC.BM_SC_PLAYER_CHARACTER_LIST): break; // Multiple characters list (still in progress)
+
+                    case -10751:
+                        EditPersonnalInfos(data, Socket);
+                        break;
                 }
             }
+        }
+
+        /// <summary>
+        ///  Update database values when info is sent by client
+        /// </summary>
+        /// <param name="data">Data sent by client</param>
+        /// <param name="socket">MMO Client</param>
+        private static void EditPersonnalInfos(IEnumerable<byte> data, mmoClient socket)
+        {
+            var a = data.Aggregate(string.Empty, (current, b) => current + (char) b);
+
+            // Update socket.info
+            socket.info.s_zone = a.Substring(10, 33).Replace("\0", string.Empty);
+            socket.info.bio = a.Substring(83, 131).Replace("\0", string.Empty);
+
+            // Update Database
+            MySQL.UpdateTable("char_zoneinfo", socket.info.s_zone, socket.info.id);
+            MySQL.UpdateTable("char_bio", socket.info.bio, socket.info.id);
         }
     }
 }
