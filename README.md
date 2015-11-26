@@ -44,6 +44,39 @@ Password=YOUR_DB_PASSWORD
 Database=YOUR_DB_NAME
 ```
 
+### Registration page (*Setup*)
+
+You will need to place the file named "register.php" on a web server. You can have it locally with softwares like Xampp or Wampserver (and others)
+
+Just copy the file in "htdocs/" folder (for xampp), or "www/" folder (for wamp). To register a new account, go on this link [http://localhost/register.php](http://localhost/register.php)
+
+You can open the file with notepad to edit the firsts lines to fit to your server :
+```
+$DB_serveur = 'localhost';
+$DB_utilisateur = 'root';
+$DB_motdepasse = '';
+$DB_base = 'sg3';
+```
+
+And these ones to edit default values to set to your new registrations :
+```
+$default_char_rank = "Admin";//Admin / GameMaster / Player / Bot / Banned
+$default_char_level = 45; //0-45
+$default_char_exp = 102400; //0-102400
+$default_char_liscence = 4; //0-4
+$default_char_tricks = "5|4|5|5|4|3|3|3|3|5|0|3|1"; //max "5|4|5|5|4|3|3|3|3|5|0|3|1"
+$default_char_gpotatos = 999999999;// 0-999 999 999
+$default_char_rupees = 999999999;// 0-999 999 999
+$default_char_coins = 999999999;// 0-999 999 999
+$default_char_questpoints = 999999999;// 0-999 999 999
+
+$default_char_age = 20;
+$default_char_bio = "BIO";
+$default_char_zoneid = 0;
+$default_char_zoneinfo = "ZONE INFO";
+```
+
+
 ### StreetEngine (*Setup*)
 
 Place every files you downloaded in your StreetGears folder.
