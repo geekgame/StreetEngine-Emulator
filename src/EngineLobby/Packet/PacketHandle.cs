@@ -114,7 +114,27 @@ namespace StreetEngine.EngineLobby.Packet
                     case ((Int16)EngineEnum.HeadersEnum.Recv.BM_SC.BM_SC_CREATE_ROOM): new Thread(() => SuccessResponse[7].Send()).Start(); break; // Create a room with the selected options and desired name
                     case ((Int16)EngineEnum.HeadersEnum.Recv.ID_BZ_SC.ID_BZ_SC_ENTER_LOBBY_ROOM): new Thread(() => SuccessResponse[8].Send()).Start(); break; // Enter the lobby waiting room
                     case ((Int16)EngineEnum.HeadersEnum.Recv.ID_BZ_SC.ID_BZ_SC_UNKNOW_LOBBY): new Thread(() => SuccessResponse[9].Send()).Start(); break; // Enter the lobby waiting room
+
+                    //Play button pressed
+
+                    case (5):
+                    case (-29440):
+                    case (2189):
+                    case (-26104):
+                    case (-25958):
+                        Console.BackgroundColor = ConsoleColor.Blue;
+                        Console.WriteLine(header);
+                        File.AppendAllText(@"C:\Users\matthieu\Desktop\log1.txt",
+                            header.ToString() + "[" + Encoding.ASCII.GetString(data) + "]" + Environment.NewLine);
+                        break;
+
+                    default:
+                        Console.BackgroundColor = ConsoleColor.Black;
+                        Console.WriteLine(header);
+                        break; 
                 }
+                Console.BackgroundColor = ConsoleColor.Black;
+
             }
         }
     }
