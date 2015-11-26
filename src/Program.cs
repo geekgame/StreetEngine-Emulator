@@ -35,8 +35,15 @@ namespace StreetEngine
     using System.Runtime.InteropServices;
     using System.Net;
 
+    
+
     class Program
     {
+        public static bool go = true;
+
+
+
+
         /// <summary>
         /// Database manager definition
         /// </summary>
@@ -109,6 +116,7 @@ namespace StreetEngine
             Engine.Network.mmoServer.Start();
 
             // Start StreetGears
+            /*
             try
             {
                 ProcessStartInfo sgInfo = new ProcessStartInfo(EngineConfig.IniConfig.Ini.Elements["GameSettings"]["gameLocation"] + "StreetGear.exe");
@@ -130,6 +138,14 @@ namespace StreetEngine
                 Log.Append("Error", "Could not start Game!" + Environment.NewLine + ex.ToString(), ConsoleColor.Black, ConsoleColor.Red);
             }
             Console.ReadKey();
+            */
+
+            while (true)
+            {
+                while (Console.ReadKey().Key != ConsoleKey.Escape) ;
+                Console.Clear();
+                go = true;
+            }
         }
     }
 }
